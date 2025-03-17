@@ -56,21 +56,10 @@ export class ThreeViewerComponent implements AfterViewInit {
   }
 
   private loadModel() {
-    // Zastąp 'url_do_pliku_s3' odpowiednim URL pliku w S3
-    const s3Url =
-      'https://policrafts.s3.eu-central-1.amazonaws.com/dom.glb?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDGV1LWNlbnRyYWwtMSJIMEYCIQCSfRAFbct%2F%2BjwEexWCAMRa3hYItz%2F3msEWvM8jm8UV5QIhAOa8LsOnqNzlPVHsbE73dXEB9Xz3hZ%2BqO9s3nguO5c5vKssDCEwQABoMNDEyMzgxNzYxNTg2IgzLpN%2FgDf6JU10I04oqqAMP9HwnsghEuXmPiJ%2B2iZWvW0%2BQDbhk43nxo%2F6Hv8OGl0%2Bd5qs3Xh5qgiRGEOJhxrYp8KqNcNxvpIIk0yiDsgnMyte20FbZ8Vsrdsoa9jAxzQh8Pi%2BgO5xvA8roOszADYSoI4KG2zgLlQvERxsrZeGGRuEVbpIR76%2BwXB2Gc6pPbHVabdsPS8FFA%2Fon%2BG2HWpvOUIVFZe6zJX%2FRswYwLfRjiQqkDdxWnCOlV5sgmlja1h%2FoqvgMsb%2FmWYa1buyCjfmuHdcLnZ37XQhv2rpqh%2BroOKUh2Q7t8ytCPUC%2BK%2Fp7PDOVJUzG%2B6kpJWmgEBXOoMXLQgj3SxjOZ3igs%2BQH%2B9HNqb%2BfcfNBepCS0hEGxeRT7qTe5JzspDqvs2jyYBROUbsJKud0w6zpb1dtYqnCZ%2FLLw5W5KOYvDxSemTDn5oHwLBgo6ixHKtwD5M6FWyffn4Tti8DreL%2FEwtzyREhdZZ9n4sbh0MXUrPtlfofaMctqwGMc1sHEgfuZNHpD%2F%2FV65M96OJHYkqxU%2Bn5opE6q5oa0Qqk5L99x4W978DbMYHbZv%2Fl68lisA%2FVhMOKa4b4GOuMC5RTsXoX717e4ipFsHiiBH3yOnQP8BVk4gXh8Yu5R3tXsJ%2FTJIfPrzESyNcdlITDPzBjpc9WaMxnSetqldDF9bVIE2a2JpPxQLCSKAeraLlcR%2FYBsYL1fjcQT2lXD1dn6nIYtUgM%2Bzt9Nlah3RQYSwA6EHRATihAPDMBj0%2F18rKQKFpRwIiAKY%2Bghfl26Pz21wC1mWzv8gwxjgRqH35NtE5O2c3RWv9C0OX6xpJ%2BiYeSZj%2BPAxPqxB8lieg3gvKtcYnRTNiVDJ4mwMaqlOEox9JCQiz337%2FpHyKHaq4VdR7%2FlqDwqMZwbnlFa2oM4XO7pH8Q%2B4I73Pu6Y1Mo0dMMPvNcV1pagLCjhfW8slNatET9nCpWo25AJQtUlzy4s3GeGutveH6WpsIZSTYvyjqh%2BtAFBfXfglbrGM0POPkG5XMNP8hO9LoN2qUh7spgJ4BX1emlgiHuVrPwIX5IeFVXQ%2BY%2BhMA%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAWAA66KAZDVJFHEQB%2F20250317%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20250317T182507Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=b1b989709c526fcd3b69e43ca925ff3e833a0bac0dca04595d0e3b549f3ab149';
-
-    this.loader.load(
-      s3Url,
-      (gltf: { scene: THREE.Group }) => {
-        this.model = gltf.scene;
-        this.scene.add(this.model);
-      },
-      undefined,
-      (error) => {
-        console.error('Error loading the model:', error);
-      }
-    );
+    this.loader.load('assets/dom.glb', (gltf: { scene: THREE.Group }) => {
+      this.model = gltf.scene;
+      this.scene.add(this.model);
+    });
   }
 
   private animate = () => {
