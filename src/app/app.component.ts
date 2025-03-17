@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { ThreeViewerComponent } from './components/three-viewer/three-viewer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  imports: [ThreeViewerComponent],
 })
 export class AppComponent {
-  title = 'szkielety-pmbau';
+  @ViewChild('viewer') viewer!: ThreeViewerComponent;
+
+  toggleMesh(meshName: string, event: any) {
+    this.viewer.toggleMeshVisibility(meshName, event.target.checked);
+  }
 }
