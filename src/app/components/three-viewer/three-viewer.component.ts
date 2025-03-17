@@ -1,9 +1,7 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-
-// Import OrbitControls jako obiekt z zewnętrznej biblioteki
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 @Component({
   selector: 'app-three-viewer',
@@ -19,8 +17,7 @@ export class ThreeViewerComponent implements AfterViewInit {
   private model!: THREE.Group;
   private loader = new GLTFLoader();
 
-  // Zmieniamy typ controls na any
-  private controls: any; // Można zmienić na 'any' lub 'OrbitControls' (patrz opis poniżej)
+  private controls: any; // Typowanie 'any' dla OrbitControls
 
   ngAfterViewInit(): void {
     this.initScene();
@@ -52,7 +49,10 @@ export class ThreeViewerComponent implements AfterViewInit {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true; // Smooth movement
     this.controls.dampingFactor = 0.25; // Adjust damping speed
-    this.controls.screenSpacePanning = false; // Prevent panning out of the scene
+    this.controls.screenSpacePanning = true; // Przesuwanie zależne od kamery
+
+    // Zmieniamy przycisk myszy do panningu
+    this.controls.mouseButtons.RIGHT = THREE.MOUSE.PAN; // Ustawienie prawego przycisku na panning
   }
 
   private loadModel() {
