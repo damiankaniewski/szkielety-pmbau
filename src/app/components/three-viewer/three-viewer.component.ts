@@ -97,8 +97,9 @@ export class ThreeViewerComponent implements AfterViewInit {
 
       this.model.traverse((child) => {
         if (child instanceof THREE.Mesh) {
-          child.castShadow = true;
           child.receiveShadow = true;
+
+          console.log(child);
         }
       });
 
