@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ThreeViewerComponent } from './components/three-viewer/three-viewer.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',

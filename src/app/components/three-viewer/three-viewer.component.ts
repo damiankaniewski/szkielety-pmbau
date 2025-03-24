@@ -3,14 +3,19 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-three-viewer',
   templateUrl: './three-viewer.component.html',
   styleUrls: ['./three-viewer.component.scss'],
+  imports: [CommonModule],
 })
 export class ThreeViewerComponent implements AfterViewInit {
   @ViewChild('canvasContainer', { static: false }) canvasContainer!: ElementRef;
+
+  isLoading = true;
+  loadingMessage = 'Ładowanie...';
 
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
@@ -23,7 +28,7 @@ export class ThreeViewerComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initScene();
-    this.loadEnvironmentMap(); // Dodajemy EXR HDRI
+    this.loadEnvironmentMap();
     this.loadModel();
     this.animate();
   }
@@ -74,16 +79,19 @@ export class ThreeViewerComponent implements AfterViewInit {
     this.controls.screenSpacePanning = true;
     this.controls.mouseButtons.RIGHT = THREE.MOUSE.PAN;
   }
-
   private loadEnvironmentMap() {
+    this.loadingMessage = 'Ładowanie tła...';
     this.rgbeLoader.load('assets/world.hdr', (texture) => {
       texture.mapping = THREE.EquirectangularReflectionMapping;
       this.scene.environment = texture;
       this.scene.background = texture;
+      this.checkIfLoaded();
     });
   }
 
   private loadModel() {
+    this.loadingMessage = 'Ładowanie modelu 3D...';
+
     this.loader.load('assets/dom.glb', (gltf) => {
       this.model = gltf.scene;
 
@@ -95,7 +103,17 @@ export class ThreeViewerComponent implements AfterViewInit {
       });
 
       this.scene.add(this.model);
+      this.checkIfLoaded();
     });
+  }
+
+  private checkIfLoaded() {
+    if (this.scene.background && this.model) {
+      this.loadingMessage = 'Finalizowanie...';
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1000);
+    }
   }
 
   private animate = () => {
