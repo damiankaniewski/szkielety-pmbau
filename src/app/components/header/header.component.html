@@ -1,0 +1,21 @@
+<header class="header" [class.visible]="showHeader">
+  <div class="logo" (click)="scrollTo($event, '#home')">OMD</div>
+  <nav [class.open]="menuOpen" class="nav">
+    <ul>
+      <li *ngFor="let link of links">
+        <a
+          href="{{ link.href }}"
+          (click)="scrollTo($event, link.href)"
+          [class.active]="activeSection === link.href"
+        >
+          {{ link.label }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>

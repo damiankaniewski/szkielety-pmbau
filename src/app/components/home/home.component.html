@@ -1,0 +1,91 @@
+<div class="main-container">
+  <div class="home-navbar">
+    <div class="nav">
+      <div class="logo" data-aos="fade-right" data-aos-duration="1000">
+        <p>OMD</p>
+      </div>
+      <div
+        class="navbar"
+        data-aos="zoom-out"
+        data-aos-duration="1000"
+        data-aos-delay="300"
+      >
+        <ul>
+          <li *ngFor="let link of links">
+            <a href="{{ link.href }}" (click)="scrollTo($event, link.href)">
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" />
+  </div>
+  <div class="background" data-aos="zoom-out" data-aos-duration="3000">
+    <div
+      class="icon"
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+      data-aos-delay="300"
+      style="top: 32%; left: 45%"
+      [style.opacity]="opacity"
+    >
+      <i class="fas fa-house"></i>
+      <p>Dach ocieplany wełną</p>
+    </div>
+    <div
+      class="icon"
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+      data-aos-delay="600"
+      style="bottom: 12%; left: 55%"
+      [style.opacity]="opacity"
+    >
+      <i class="fas fa-layer-group"></i>
+      <p>Panele podłogowe z bambusa</p>
+    </div>
+    <div
+      class="icon"
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+      data-aos-delay="900"
+      style="top: 43%; left: 59%"
+      [style.opacity]="opacity"
+    >
+      <i class="fas fa-th-large"></i>
+      <p>Szyby obsydianowe</p>
+    </div>
+    <div class="gradient"></div>
+    <img
+      src="/assets/home-background.png"
+      alt="tło"
+      [style.transform]="'scale(' + scale + ')'"
+      [style.filter]="'blur(' + blur + 'px)'"
+    />
+    <img
+      class="alt-background"
+      [ngStyle]="{ opacity: opacityB }"
+      src="/assets/home-background-noc.png"
+      alt="tło"
+      [style.transform]="'scale(' + scale + ')'"
+      [style.filter]="'blur(' + blur + 'px)'"
+    />
+  </div>
+  <div
+    class="motto"
+    data-aos="fade-right"
+    data-aos-duration="1000"
+    data-aos-delay="1000"
+  >
+    <p>
+      <strong>Domy szkieletowe</strong>
+      <br />
+      - bądź unikalny <br />
+      - wyjdź przed szereg
+    </p>
+  </div>
+  <div (click)="toggleDayNight()" class="btn-toggle">
+    <i class="fas" [ngClass]="isDay ? 'fa-sun' : 'fa-moon'"></i>
+  </div>
+</div>

@@ -1,0 +1,247 @@
+<div class="configurator-container">
+  <!-- Konfigurator -->
+  <div class="configurator">
+    <div class="step">
+      <label><strong>Fundament:</strong> </label>
+      <div class="radio-buttons two-options">
+        <input
+          type="radio"
+          id="foundation1"
+          name="foundation"
+          value="płyta fundamentowa"
+          [(ngModel)]="config.foundation"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="foundation1">Płyta fundamentowa</label>
+
+        <input
+          type="radio"
+          id="foundation2"
+          name="foundation"
+          value="ława fundamentowa"
+          [(ngModel)]="config.foundation"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="foundation2">Ława fundamentowa</label>
+      </div>
+    </div>
+
+    <div class="step">
+      <label><strong>Powierzchnia:</strong></label>
+      <div class="radio-buttons two-options">
+        <input
+          type="radio"
+          id="area1"
+          name="area"
+          value="70"
+          [(ngModel)]="config.area"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="area1">70m²</label>
+
+        <input
+          type="radio"
+          id="area2"
+          name="area"
+          value="90"
+          [(ngModel)]="config.area"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="area2">90m²</label>
+      </div>
+    </div>
+
+    <div class="step">
+      <label><strong>Elewacja:</strong></label>
+      <div class="radio-buttons four-options">
+        <input
+          type="radio"
+          id="elevation1"
+          name="elevation"
+          value="tynk+lamele"
+          [(ngModel)]="config.elevation"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="elevation1">Tynk + lamele</label>
+
+        <input
+          type="radio"
+          id="elevation2"
+          name="elevation"
+          value="blacha+deski"
+          [(ngModel)]="config.elevation"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="elevation2">Blacha + deski</label>
+
+        <input
+          type="radio"
+          id="elevation3"
+          name="elevation"
+          value="białoszary tynk"
+          [(ngModel)]="config.elevation"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="elevation3">Biało-szary tynk</label>
+
+        <input
+          type="radio"
+          id="elevation4"
+          name="elevation"
+          value="tynk+deski"
+          [(ngModel)]="config.elevation"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="elevation4">Tynk + deski</label>
+      </div>
+    </div>
+
+    <div class="step">
+      <label><strong>Framugi okien:</strong></label>
+      <div class="radio-buttons three-options">
+        <input
+          type="radio"
+          id="frame1"
+          name="window-frame"
+          value="drewno"
+          [(ngModel)]="config.windowFrame"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="frame1">Drewno</label>
+
+        <input
+          type="radio"
+          id="frame2"
+          name="window-frame"
+          value="białe"
+          [(ngModel)]="config.windowFrame"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="frame2">Białe</label>
+
+        <input
+          type="radio"
+          id="frame3"
+          name="window-frame"
+          value="antracyt"
+          [(ngModel)]="config.windowFrame"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="frame3">Antracyt</label>
+      </div>
+    </div>
+
+    <div class="step">
+      <label><strong>Drzwi:</strong></label>
+      <div class="radio-buttons two-options">
+        <input
+          type="radio"
+          id="door1"
+          name="door"
+          value="standard"
+          [(ngModel)]="config.door"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="door1">Standard</label>
+
+        <input
+          type="radio"
+          id="door2"
+          name="door"
+          value="premium"
+          [(ngModel)]="config.door"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="door2">Premium</label>
+      </div>
+    </div>
+
+    <div class="step">
+      <label><strong>Daszek nad drzwiami:</strong></label>
+      <div class="radio-buttons two-options">
+        <input
+          type="radio"
+          id="roof1"
+          name="roof"
+          value="standard"
+          [(ngModel)]="config.roof"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="roof1">Standard</label>
+
+        <input
+          type="radio"
+          id="roof2"
+          name="roof"
+          value="premium"
+          [(ngModel)]="config.roof"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="roof2">Premium</label>
+      </div>
+    </div>
+
+    <div class="step">
+      <label><strong>Taras:</strong></label>
+      <div class="radio-buttons two-options">
+        <input
+          type="radio"
+          id="terrace1"
+          name="terrace"
+          value="brak"
+          [(ngModel)]="config.terrace"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="terrace1">Brak</label>
+
+        <input
+          type="radio"
+          id="terrace2"
+          name="terrace"
+          value="jest"
+          [(ngModel)]="config.terrace"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="terrace2">Jest</label>
+      </div>
+    </div>
+
+    <div class="step">
+      <label><strong>Rynny/Rury Spustowe:</strong></label>
+      <div class="radio-buttons two-options">
+        <input
+          type="radio"
+          id="gutters1"
+          name="gutters"
+          value="biały"
+          [(ngModel)]="config.gutters"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="gutters1">Biały</label>
+
+        <input
+          type="radio"
+          id="gutters2"
+          name="gutters"
+          value="antracyt"
+          [(ngModel)]="config.gutters"
+          (ngModelChange)="onConfigChange()"
+        />
+        <label for="gutters2">Antracyt</label>
+      </div>
+    </div>
+  </div>
+
+  <div id="threejs-container">
+    <div class="configurator-images" [ngClass]="{ hidden: hidden }">
+      <img src="assets/configurator-base.png" alt="" />
+
+      <div class="btn-3d" (click)="load3DView()">
+        <img src="assets/3dviewpng_flat.png" alt="" />
+        <p>Widok 3D</p>
+      </div>
+    </div>
+
+    <div #canvasContainer></div>
+  </div>
+</div>

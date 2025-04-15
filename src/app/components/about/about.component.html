@@ -1,0 +1,17 @@
+<!-- about.component.html -->
+<div class="about">
+  <div
+    class="row"
+    *ngFor="let section of sections; let i = index"
+    [ngClass]="{ reverse: i % 2 === 1 }"
+  >
+    <div class="image">
+      <img [src]="section.img" [alt]="section.title" />
+    </div>
+    <div class="text">
+      <i class="fa {{ section.icon }} icon"></i>
+      <h2>{{ section.title }}</h2>
+      <p [innerHTML]="section.text"></p>
+    </div>
+  </div>
+</div>

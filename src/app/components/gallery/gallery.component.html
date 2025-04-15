@@ -1,0 +1,30 @@
+<div class="gallery">
+  <div
+    data-aos="zoom-in"
+    data-aos-duration="1000"
+    class="tile"
+    *ngFor="let image of images; let i = index"
+    [ngClass]="'tile-' + image.tile"
+    (click)="openModal(i)"
+  >
+    <img [src]="image.src" alt="Gallery image" />
+  </div>
+
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <div class="background-modal"></div>
+      <img [src]="selectedImage" alt="Selected image" />
+      <div class="close-btn" (click)="closeModal()">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="buttons">
+        <div class="button" (click)="prevImage()">
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="button" (click)="nextImage()">
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
