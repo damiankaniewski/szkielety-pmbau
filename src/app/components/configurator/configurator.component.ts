@@ -138,14 +138,7 @@ export class ConfiguratorComponent implements AfterViewInit {
 
       this.model.traverse((child) => {
         if (child instanceof THREE.Mesh) {
-          console.log(child.name);
-
-          if (
-            child.name === '70_elewacja_biała001' ||
-            child.name === '70_elewacja_biała001_1'
-          ) {
-            child.castShadow = true;
-          }
+          child.castShadow = true;
           child.visible = false;
 
           child.receiveShadow = true;
