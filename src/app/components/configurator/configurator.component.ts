@@ -22,6 +22,8 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 export class ConfiguratorComponent implements AfterViewInit {
   @ViewChild('canvasContainer') canvasContainer!: ElementRef;
 
+  private modelUrl = 'assets/dom.glb';
+
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
@@ -127,7 +129,7 @@ export class ConfiguratorComponent implements AfterViewInit {
   }
 
   private loadModel() {
-    this.loader.load('assets/dom.glb', (gltf) => {
+    this.loader.load(this.modelUrl, (gltf) => {
       this.model = gltf.scene;
       this.loadedMeshes = [];
 
