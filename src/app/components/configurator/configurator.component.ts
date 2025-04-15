@@ -23,6 +23,7 @@ export class ConfiguratorComponent implements AfterViewInit {
   @ViewChild('canvasContainer') canvasContainer!: ElementRef;
 
   private modelUrl = 'https://policrafts.s3.eu-central-1.amazonaws.com/dom.glb';
+  private hdrUrl = 'https://policrafts.s3.eu-central-1.amazonaws.com/world.hdr';
 
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
@@ -120,7 +121,7 @@ export class ConfiguratorComponent implements AfterViewInit {
   }
 
   private loadEnvironmentMap() {
-    this.rgbeLoader.load('assets/world.hdr', (texture) => {
+    this.rgbeLoader.load(this.hdrUrl, (texture) => {
       texture.mapping = THREE.EquirectangularReflectionMapping;
 
       this.scene.environment = texture;
