@@ -22,7 +22,7 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 export class ConfiguratorComponent implements AfterViewInit {
   @ViewChild('canvasContainer') canvasContainer!: ElementRef;
 
-  private modelUrl = 'assets/dom.glb';
+  private modelUrl = 'https://policrafts.s3.eu-central-1.amazonaws.com/dom.glb';
 
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
