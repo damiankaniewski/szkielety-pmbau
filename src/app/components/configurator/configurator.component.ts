@@ -11,7 +11,6 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FormsModule } from '@angular/forms';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 
 @Component({
   selector: 'app-configurator',
@@ -22,13 +21,12 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 export class ConfiguratorComponent implements AfterViewInit {
   @ViewChild('canvasContainer') canvasContainer!: ElementRef;
 
-  private modelUrl = 'assets/model/dom-opt.gltf';
+  private modelUrl = 'assets/model/dom-opt.json';
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
   private model!: THREE.Group;
   private loader = new GLTFLoader();
-  private rgbeLoader = new RGBELoader();
   private controls: any;
   showCanvas = false;
   hidden = false;
@@ -70,7 +68,7 @@ export class ConfiguratorComponent implements AfterViewInit {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      1000,
     );
     this.camera.position.set(0, 8, 8);
     this.camera.lookAt(0, 0, 0);
@@ -276,9 +274,73 @@ export class ConfiguratorComponent implements AfterViewInit {
     });
   }
 
-  // Wywoływana przy zmianach konfiguracji z szablonu
+  updateImages() {
+    const allImages = document.querySelectorAll('.configurator-images img');
+    allImages.forEach((img) => {
+      img.classList.remove('img-active');
+      img.classList.add('img-disabled');
+    });
+
+    const idsToActivate: string[] = [];
+
+    idsToActivate.push('90_elewacja_biało_ciemna');
+
+    if (this.config.area === '90') {
+      switch (this.config.elevation) {
+        case 'tynk+lamele':
+          idsToActivate.push('90_elewacja_biała_+_lamele');
+          break;
+        case 'blacha+deski':
+          idsToActivate.push('90_elewacja_blacha_+_deski');
+          break;
+        case 'białoszary tynk':
+          idsToActivate.push('90_elewacja_biało_ciemna');
+          break;
+        case 'tynk+deski':
+          idsToActivate.push('90_elewacja_biała_+_deski');
+          break;
+      }
+
+      switch (this.config.windowFrame) {
+        case 'antracyt':
+          idsToActivate.push('90_okna_antracyt');
+          break;
+        case 'białe':
+          idsToActivate.push('90_okna_biały');
+          break;
+      }
+
+      if (this.config.terrace === 'jest') {
+        idsToActivate.push('90_taras');
+      }
+
+      switch (this.config.gutters) {
+        case 'biały':
+          idsToActivate.push('90_rynny_białe');
+          break;
+        case 'antracyt':
+          idsToActivate.push('90_rynny');
+          break;
+      }
+    }
+
+    idsToActivate.forEach((id) => {
+      const img = document.getElementById(id);
+      if (img) {
+        img.classList.remove('img-disabled');
+        img.classList.add('img-active');
+      } else {
+        console.warn(`Obrazek z ID '${id}' nie został znaleziony`);
+      }
+    });
+  }
+
   onConfigChange() {
-    this.updateMeshes();
+    if (this.model) {
+      this.updateMeshes();
+    } else {
+      this.updateImages();
+    }
   }
 
   load3DView() {

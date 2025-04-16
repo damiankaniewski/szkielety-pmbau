@@ -97,12 +97,23 @@
       max-width: 100%;
       transition: all 1s ease;
 
+      .img-disabled {
+        opacity: 0;
+        transition: all 1s;
+      }
+
+      .img-active {
+        opacity: 1;
+        transition: all 1s;
+      }
+
       &.hidden {
         opacity: 0;
         pointer-events: none;
       }
 
       img {
+        position: absolute;
         object-fit: cover;
         width: 100%;
         height: auto;
