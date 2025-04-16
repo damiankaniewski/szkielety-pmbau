@@ -22,11 +22,7 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 export class ConfiguratorComponent implements AfterViewInit {
   @ViewChild('canvasContainer') canvasContainer!: ElementRef;
 
-  private modelUrl =
-    'https://policrafts.s3.eu-central-1.amazonaws.com/dom.glb?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDGV1LWNlbnRyYWwtMSJIMEYCIQCp2PhAUQ0rI%2FG8l1GZlysarl51P2cv6Sz3IBFWWrkilQIhAO88rYpu5YWkEZ%2FAFdINFGvB8fA17EHMtRgWF43dNVGdKrkDCDcQABoMNDEyMzgxNzYxNTg2Igz3exHWliRVk9L%2BqacqlgPhc%2B4EOoyuLUzNSIj5R6hbxCOVyTYc2eia9FVQnIbNUui530CpY5lQ92aSgCvj0Kuw9GGsYvlDu5d8E3J5985Nacs5MBKwucAr13QSVwxKxoWj8Jm9rhmGmYJz7g72iFv46dDq%2B8oU8zlsG5moYRhVE3K5VcbE6lqLYdhgE4Y2lnFbl9U0nraeWEFjmgXu5cIZods1aUbhPU0DJJCNdvpR7nH9%2FYa5qTFIytMRUP48zIpkZch%2BvB0lpsWLzAf8ipjeJuRFcrogNjGEDlRNaEmT%2Bf1hwhk4GPe02o3cwSIP5wLLmOGKwAxgNofdjzrWhF5HVdVVhZNumP5cCb20hfCnwn6YNBZ8jzv8BX0ZDxZcVI8%2F%2B5YPOBvueigAA6qaYE3DNv2HgQi6MUdM5GhG3fCRFHI2OjSebrE9KoeE30lir91ARKC2N9XgmmM35kyFsaaU8WOtQWFhHfw7nxhJMqLr5Nema1Xy9y4G6PQsgKGsWoBKXSZuDdBkmm4BLZhdrp90zM74PDOhy1El7g6UIX0Ij78%2BeEALMPeP%2B78GOt0CEDg9DwIUiFlBFDsxAAWXQm6oCIvvVmGo1c2byIEeuJ6BNV%2BD%2FqVafMisOJrNv9lE%2FsZ6g0EaheXbK62yMGb%2F9S%2BdJ7WTq3nXzR8Q1Cd6yi5UKAF%2F9oK09w7Smh8yBWg0vYBqfkUEf3O5JbhyWNlUU7t2bgKZop6eQk6Tu9wNb2Ki2nOK0BnCLpXQ02BOsnik7sTYAXB395eaAxPotzPnwXC9lo0%2BjUBNyCDlZd4MhPO2mHY2YCMIXaxBSz0nBWfg4nfcCk%2BUl2Pw5k%2BV41zoD5ED%2BXatVWfABGPuLzbAEZNuz6hRtDG6JS7DMftX5udNqPhtG9c4Fd1%2F2pnPoAjjn1ARLdyeG9onICq8h2v1ahsxfMQIiQZcgp3bxbgcOskfUvcoRcIN2jdh3SdmSt1X4zdywcupWtUOVlecXdqus%2F6Wg4PHayTAZUt0fMKiH3GMfb%2FIm7EeO6H6jbRqWw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAWAA66KAZMNJXOYPU%2F20250415%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20250415T220853Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=11c8558572c700d45e4aed84b7a3b86e9e10827a9d037dab5d2aaaa573e319fd';
-  private hdrUrl =
-    'https://policrafts.s3.eu-central-1.amazonaws.com/world.hdr?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDGV1LWNlbnRyYWwtMSJIMEYCIQCp2PhAUQ0rI%2FG8l1GZlysarl51P2cv6Sz3IBFWWrkilQIhAO88rYpu5YWkEZ%2FAFdINFGvB8fA17EHMtRgWF43dNVGdKrkDCDcQABoMNDEyMzgxNzYxNTg2Igz3exHWliRVk9L%2BqacqlgPhc%2B4EOoyuLUzNSIj5R6hbxCOVyTYc2eia9FVQnIbNUui530CpY5lQ92aSgCvj0Kuw9GGsYvlDu5d8E3J5985Nacs5MBKwucAr13QSVwxKxoWj8Jm9rhmGmYJz7g72iFv46dDq%2B8oU8zlsG5moYRhVE3K5VcbE6lqLYdhgE4Y2lnFbl9U0nraeWEFjmgXu5cIZods1aUbhPU0DJJCNdvpR7nH9%2FYa5qTFIytMRUP48zIpkZch%2BvB0lpsWLzAf8ipjeJuRFcrogNjGEDlRNaEmT%2Bf1hwhk4GPe02o3cwSIP5wLLmOGKwAxgNofdjzrWhF5HVdVVhZNumP5cCb20hfCnwn6YNBZ8jzv8BX0ZDxZcVI8%2F%2B5YPOBvueigAA6qaYE3DNv2HgQi6MUdM5GhG3fCRFHI2OjSebrE9KoeE30lir91ARKC2N9XgmmM35kyFsaaU8WOtQWFhHfw7nxhJMqLr5Nema1Xy9y4G6PQsgKGsWoBKXSZuDdBkmm4BLZhdrp90zM74PDOhy1El7g6UIX0Ij78%2BeEALMPeP%2B78GOt0CEDg9DwIUiFlBFDsxAAWXQm6oCIvvVmGo1c2byIEeuJ6BNV%2BD%2FqVafMisOJrNv9lE%2FsZ6g0EaheXbK62yMGb%2F9S%2BdJ7WTq3nXzR8Q1Cd6yi5UKAF%2F9oK09w7Smh8yBWg0vYBqfkUEf3O5JbhyWNlUU7t2bgKZop6eQk6Tu9wNb2Ki2nOK0BnCLpXQ02BOsnik7sTYAXB395eaAxPotzPnwXC9lo0%2BjUBNyCDlZd4MhPO2mHY2YCMIXaxBSz0nBWfg4nfcCk%2BUl2Pw5k%2BV41zoD5ED%2BXatVWfABGPuLzbAEZNuz6hRtDG6JS7DMftX5udNqPhtG9c4Fd1%2F2pnPoAjjn1ARLdyeG9onICq8h2v1ahsxfMQIiQZcgp3bxbgcOskfUvcoRcIN2jdh3SdmSt1X4zdywcupWtUOVlecXdqus%2F6Wg4PHayTAZUt0fMKiH3GMfb%2FIm7EeO6H6jbRqWw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAWAA66KAZMNJXOYPU%2F20250415%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20250415T220930Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=200661c1eddadc6836e34ff4b5c60a21b8a8d7a1a4d9bd7ea53c06372d64ffef';
-
+  private modelUrl = 'assets/model/dom-opt.gltf';
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
@@ -76,7 +72,7 @@ export class ConfiguratorComponent implements AfterViewInit {
       0.1,
       1000
     );
-    this.camera.position.set(0, 7, 7);
+    this.camera.position.set(0, 8, 8);
     this.camera.lookAt(0, 0, 0);
     this.camera.rotation.x = -Math.PI / 6;
 
@@ -110,6 +106,9 @@ export class ConfiguratorComponent implements AfterViewInit {
 
     this.scene.add(sunLight);
 
+    const ambientLight = new THREE.AmbientLight(0xffffffff, 2);
+    this.scene.add(ambientLight);
+
     this.controls = new OrbitControls(this.camera, canvas);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.25;
@@ -119,16 +118,7 @@ export class ConfiguratorComponent implements AfterViewInit {
     this.controls.enableRotate = true;
     this.controls.enableZoom = false;
     this.controls.enablePan = false;
-    this.controls.target.set(5, 3, -2);
-  }
-
-  private loadEnvironmentMap() {
-    this.rgbeLoader.load(this.hdrUrl, (texture) => {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-
-      this.scene.environment = texture;
-      this.scene.background = texture;
-    });
+    this.controls.target.set(5, 2, -3);
   }
 
   private loadModel() {
@@ -293,7 +283,6 @@ export class ConfiguratorComponent implements AfterViewInit {
 
   load3DView() {
     this.hidden = true;
-    this.loadEnvironmentMap();
     this.loadModel();
   }
 
