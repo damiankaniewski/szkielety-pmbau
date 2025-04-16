@@ -112,12 +112,16 @@
         pointer-events: none;
       }
 
+      #modelbutton {
+        position: unset;
+      }
+
       img {
         position: absolute;
         object-fit: cover;
         width: 100%;
-        height: auto;
-        object-position: center center;
+        height: 100vh;
+        object-position: top;
       }
 
       .btn-3d {
