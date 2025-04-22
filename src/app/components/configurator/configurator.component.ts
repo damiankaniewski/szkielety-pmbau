@@ -35,12 +35,12 @@ export class ConfiguratorComponent implements AfterViewInit {
   config = {
     foundation: 'płyta fundamentowa',
     area: '90',
-    elevation: 'tynk+lamele',
+    elevation: 'białoszary tynk',
     windowFrame: 'drewno',
     door: 'standard',
     roof: 'standard',
     terrace: 'brak',
-    gutters: 'biały',
+    gutters: 'antracyt',
   };
 
   private loadedMeshes: THREE.Mesh[] = [];
