@@ -30,6 +30,7 @@ export class ConfiguratorComponent implements AfterViewInit {
   private controls: any;
   showCanvas = false;
   hidden = false;
+  sideToggle = false;
 
   config = {
     foundation: 'płyta fundamentowa',
@@ -284,42 +285,85 @@ export class ConfiguratorComponent implements AfterViewInit {
     const idsToActivate: string[] = [];
 
     idsToActivate.push('90_elewacja_biało_ciemna');
+    idsToActivate.push('90_elewacja_biało_ciemna_front');
 
     if (this.config.area === '90') {
       switch (this.config.elevation) {
         case 'tynk+lamele':
           idsToActivate.push('90_elewacja_biała_+_lamele');
+          idsToActivate.push('90_elewacja_biała_+_lamele_front');
           break;
         case 'blacha+deski':
           idsToActivate.push('90_elewacja_blacha_+_deski');
+          idsToActivate.push('90_elewacja_blacha_+_deski_front');
           break;
         case 'białoszary tynk':
           idsToActivate.push('90_elewacja_biało_ciemna');
+          idsToActivate.push('90_elewacja_biało_ciemna_front');
           break;
         case 'tynk+deski':
           idsToActivate.push('90_elewacja_biała_+_deski');
+          idsToActivate.push('90_elewacja_biała_+_drewno_front');
           break;
       }
 
       switch (this.config.windowFrame) {
         case 'antracyt':
           idsToActivate.push('90_okna_antracyt');
+          idsToActivate.push('90_okna_antracyt_front');
           break;
         case 'białe':
           idsToActivate.push('90_okna_biały');
+          idsToActivate.push('90_okna_biały_front');
           break;
       }
 
       if (this.config.terrace === 'jest') {
         idsToActivate.push('90_taras');
+        idsToActivate.push('90_taras_front');
       }
 
       switch (this.config.gutters) {
         case 'biały':
           idsToActivate.push('90_rynny_białe');
+          idsToActivate.push('90_rynny_białe_front');
           break;
         case 'antracyt':
           idsToActivate.push('90_rynny');
+          break;
+      }
+
+      switch (this.config.door) {
+        case 'premium':
+          idsToActivate.push('90_drzwi_premium_front');
+          break;
+      }
+
+      switch (this.config.roof) {
+        case 'premium':
+          switch (this.config.elevation) {
+            case 'tynk+lamele':
+              idsToActivate.push('90_daszek_premium_biała_front');
+              break;
+            case 'blacha+deski':
+              idsToActivate.push('90_daszek_premium_czarna_front');
+              break;
+            case 'białoszary tynk':
+              idsToActivate.push('90_daszek_premium_biała_front');
+              break;
+            case 'tynk+deski':
+              idsToActivate.push('90_daszek_premium_biała_front');
+              idsToActivate.push('90_daszek_premium_lamele_drewno_front');
+
+              break;
+          }
+          break;
+        case 'standard':
+          switch (this.config.elevation) {
+            case 'blacha+deski':
+              idsToActivate.push('90_daszek_standard_czarna_front');
+              break;
+          }
           break;
       }
     }
@@ -346,6 +390,11 @@ export class ConfiguratorComponent implements AfterViewInit {
   load3DView() {
     this.hidden = true;
     this.loadModel();
+  }
+
+  toggleSide() {
+    this.sideToggle = !this.sideToggle;
+    console.log('sideToggle = ' + this.sideToggle);
   }
 
   private animate = () => {
